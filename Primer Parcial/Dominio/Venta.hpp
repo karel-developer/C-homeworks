@@ -69,7 +69,4 @@ inline void from_json(const nlohmann::json& j, Venta& v) {
     v.setCompradorId(j.at("compradorId").get<int>());
     v.setProductos(j.at("productos").get<vector<Producto>>());
     v.setFecha(j.at("fecha").get<string>());
-    // Nota: el total se recalcula en el constructor, pero aquí no se usa porque ya está en JSON.
-    // Si quieres asegurar consistencia, puedes llamar a v.setTotal(j.at("total").get<double>());
-    // Pero como calcularTotal es el que define total, mejor no settearlo.
 }
