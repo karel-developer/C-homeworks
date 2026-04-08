@@ -142,7 +142,7 @@ public:
                 first = false;
             }
         }
-        if (first) throw runtime_error("No hay productos para calcular el más caro.");
+        if (first) throw runtime_error("No hay productos para calcular el mas caro.");
         return masCaro;
     }
 
@@ -157,7 +157,7 @@ public:
                 first = false;
             }
         }
-        if (first) throw runtime_error("No hay productos para calcular el más barato.");
+        if (first) throw runtime_error("No hay productos para calcular el mas barato.");
         return masBarato;
     }
 };
