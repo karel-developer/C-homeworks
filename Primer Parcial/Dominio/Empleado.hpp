@@ -23,6 +23,7 @@ class Empleado : public Persona {
         }
         void mostrarInformacion() const override {
             cout << "------------------------\n";
+            cout << "ID: " << getId() << '\n';
             cout << "Nombre: " << getNombre() << '\n';
             cout << "Apellido: " << getApellido() << '\n';
             cout << "Telefono: " << getTelefono() << '\n';
@@ -33,22 +34,22 @@ class Empleado : public Persona {
         void actualizarSalario(double salary) { setSalario(salary); }
     };
 
-inline void to_json(nlohmann::json& j, const Empleado& e) {
-    j = nlohmann::json{
-        {"id", e.getId()},
-        {"nombre", e.getNombre()},
-        {"apellido", e.getApellido()},
-        {"telefono", e.getTelefono()},
-        {"cargo", e.getCargo()},
-        {"salario", e.getSalario()}
-    };
-}
+    inline void to_json(nlohmann::json& j, const Empleado& e) {
+        j = nlohmann::json{
+            {"id", e.getId()},
+            {"nombre", e.getNombre()},
+            {"apellido", e.getApellido()},
+            {"telefono", e.getTelefono()},
+            {"cargo", e.getCargo()},
+            {"salario", e.getSalario()}
+        };
+    }
 
-inline void from_json(const nlohmann::json& j, Empleado& e) {
-    e.setId(j.at("id").get<int>());
-    e.setNombre(j.at("nombre").get<string>());
-    e.setApellido(j.at("apellido").get<string>());
-    e.setTelefono(j.at("telefono").get<string>());
-    e.setCargo(j.at("cargo").get<string>());
-    e.setSalario(j.at("salario").get<double>());
-}
+    inline void from_json(const nlohmann::json& j, Empleado& e) {
+        e.setId(j.at("id").get<int>());
+        e.setNombre(j.at("nombre").get<string>());
+        e.setApellido(j.at("apellido").get<string>());
+        e.setTelefono(j.at("telefono").get<string>());
+        e.setCargo(j.at("cargo").get<string>());
+        e.setSalario(j.at("salario").get<double>());
+    }
