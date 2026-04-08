@@ -29,7 +29,7 @@ class Persona {
                 __throw_invalid_argument("El numero de telefono debe tener al menos 8 caracteres.\n");
             }
             for(const char l : phoneNumber) {
-                if(l - '0' > 9 || l - '0' < 0) {
+                if(l - '0' > 9 || l - '0' < 0 && l != '+') {
                     __throw_invalid_argument("El numero de telefono no debe contener ninguna letra del abecedario.\n");
                 }
             }
@@ -43,18 +43,18 @@ class Persona {
         virtual ~Persona() = default;
     };
 
-inline void to_json(nlohmann::json& j, const Persona& p) {
-    j = nlohmann::json{
-        {"id", p.getId()},
-        {"nombre", p.getNombre()},
-        {"apellido", p.getApellido()},
-        {"telefono", p.getTelefono()}
-    };
-}
+    inline void to_json(nlohmann::json& j, const Persona& p) {
+        j = nlohmann::json{
+            {"id", p.getId()},
+            {"nombre", p.getNombre()},
+            {"apellido", p.getApellido()},
+            {"telefono", p.getTelefono()}
+        };
+    }
 
-inline void from_json(const nlohmann::json& j, Persona& p) {
-    p.setId(j.at("id").get<int>());
-    p.setNombre(j.at("nombre").get<string>());
-    p.setApellido(j.at("apellido").get<string>());
-    p.setTelefono(j.at("telefono").get<string>());
-}
+    inline void from_json(const nlohmann::json& j, Persona& p) {
+        p.setId(j.at("id").get<int>());
+        p.setNombre(j.at("nombre").get<string>());
+        p.setApellido(j.at("apellido").get<string>());
+        p.setTelefono(j.at("telefono").get<string>());
+    }
