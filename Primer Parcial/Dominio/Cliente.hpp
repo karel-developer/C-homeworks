@@ -38,6 +38,7 @@ class Cliente : public Persona {
         }
         void mostrarInformacion() const override {
             cout << "------------INFORMACION-DEL-CLIENTE------------\n";
+            cout << "ID: " << getId() << '\n';
             cout << "Nombre: " << getNombre() << '\n';
             cout << "Apellido: " << getApellido() << '\n';
             cout << "Telefono: " << getTelefono() << '\n';
@@ -49,22 +50,22 @@ class Cliente : public Persona {
         }
     };
 
-inline void to_json(nlohmann::json& j, const Cliente& c) {
-    j = nlohmann::json{
-        {"id", c.getId()},
-        {"nombre", c.getNombre()},
-        {"apellido", c.getApellido()},
-        {"telefono", c.getTelefono()},
-        {"correo", c.getCorreo()},
-        {"historialCompras", c.getHistorial()}
-    };
-}
+    inline void to_json(nlohmann::json& j, const Cliente& c) {
+        j = nlohmann::json{
+            {"id", c.getId()},
+            {"nombre", c.getNombre()},
+            {"apellido", c.getApellido()},
+            {"telefono", c.getTelefono()},
+            {"correo", c.getCorreo()},
+            {"historialCompras", c.getHistorial()}
+        };
+    }
 
-inline void from_json(const nlohmann::json& j, Cliente& c) {
-    c.setId(j.at("id").get<int>());
-    c.setNombre(j.at("nombre").get<string>());
-    c.setApellido(j.at("apellido").get<string>());
-    c.setTelefono(j.at("telefono").get<string>());
-    c.setCorreo(j.at("correo").get<string>());
-    c.setHistorial(j.at("historialCompras").get<vector<Venta>>());
-}
+    inline void from_json(const nlohmann::json& j, Cliente& c) {
+        c.setId(j.at("id").get<int>());
+        c.setNombre(j.at("nombre").get<string>());
+        c.setApellido(j.at("apellido").get<string>());
+        c.setTelefono(j.at("telefono").get<string>());
+        c.setCorreo(j.at("correo").get<string>());
+        c.setHistorial(j.at("historialCompras").get<vector<Venta>>());
+    }
