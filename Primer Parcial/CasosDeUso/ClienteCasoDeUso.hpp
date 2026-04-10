@@ -1,5 +1,5 @@
 #pragma once
-#include "../Infraestructura/ClienteRepositorio.hpp"
+#include "./Interfaces/IClienteRepositorio.hpp"
 #include "../Dominio/Cliente.hpp"
 #include <vector>
 #include <string>
@@ -9,7 +9,7 @@ using namespace std;
 
 class ClienteCasoDeUso {
 private:
-    ClienteRepositorio& repo;
+    IClienteRepositorio& repo;
 
     int generarNuevoId() {
         vector<Cliente> todos = repo.obtenerTodos();
@@ -22,7 +22,7 @@ private:
     }
 
 public:
-    ClienteCasoDeUso(ClienteRepositorio& repositorio) : repo(repositorio) {}
+    ClienteCasoDeUso(IClienteRepositorio& repositorio) : repo(repositorio) {}
 
     int agregarCliente(const string& nombre, const string& apellido,
                         const string& telefono, const string& correo) {

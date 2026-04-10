@@ -1,7 +1,7 @@
 #pragma once
-#include "../Infraestructura/VentaRepositorio.hpp"
-#include "../Infraestructura/ProductoRepositorio.hpp"
-#include "../Infraestructura/ClienteRepositorio.hpp"
+#include "./Interfaces/IVentaRepositorio.hpp"
+#include "./Interfaces/IProductoRepositorio.hpp"
+#include "./Interfaces/IClienteRepositorio.hpp"
 #include "../Dominio/Venta.hpp"
 #include "../Dominio/Producto.hpp"
 #include "../Dominio/Cliente.hpp"
@@ -14,9 +14,9 @@ using namespace std;
 
 class VentaCasoDeUso {
 private:
-    VentaRepositorio& ventaRepo;
-    ProductoRepositorio& productoRepo;
-    ClienteRepositorio& clienteRepo;
+    IVentaRepositorio& ventaRepo;
+    IProductoRepositorio& productoRepo;
+    IClienteRepositorio& clienteRepo;
 
     int generarNuevoId() {
         vector<Venta> todas = ventaRepo.obtenerTodos();
@@ -29,7 +29,7 @@ private:
     }
 
 public:
-    VentaCasoDeUso(VentaRepositorio& vRepo, ProductoRepositorio& pRepo, ClienteRepositorio& cRepo)
+    VentaCasoDeUso(IVentaRepositorio& vRepo, IProductoRepositorio& pRepo, IClienteRepositorio& cRepo)
         : ventaRepo(vRepo), productoRepo(pRepo), clienteRepo(cRepo) {}
         
    void registrarVenta(int clienteId, const vector<int>& idsProductos, const string& fecha) {

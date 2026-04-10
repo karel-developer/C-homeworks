@@ -1,5 +1,5 @@
 #pragma once
-#include "../Infraestructura/ProductoRepositorio.hpp"
+#include "./Interfaces/IProductoRepositorio.hpp"
 #include "../Dominio/Producto.hpp"
 #include <vector>
 #include <string>
@@ -10,7 +10,7 @@ using namespace std;
 
 class ProductoCasoDeUso {
 private:
-    ProductoRepositorio& repo;
+    IProductoRepositorio& repo;
 
     int generarNuevoId() {
         vector<Producto> todos = repo.obtenerTodos();
@@ -23,7 +23,7 @@ private:
     }
 
 public:
-    ProductoCasoDeUso(ProductoRepositorio& repositorio) : repo(repositorio) {}
+    ProductoCasoDeUso(IProductoRepositorio& repositorio) : repo(repositorio) {}
 
     int agregarProducto(const string& nombre, const string& categoria,
                          double precio, int stock) {

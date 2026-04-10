@@ -1,5 +1,5 @@
 #pragma once
-#include "../Infraestructura/EmpleadoRepositorio.hpp"
+#include "./Interfaces/IEmpleadoRepositorio.hpp"
 #include "../Dominio/Empleado.hpp"
 #include <vector>
 #include <map>
@@ -10,7 +10,7 @@ using namespace std;
 
 class EmpleadoCasoDeUso {
 private:
-    EmpleadoRepositorio& repo;
+    IEmpleadoRepositorio& repo;
 
     int generarNuevoId() {
         vector<Empleado> todos = repo.obtenerTodos();
@@ -23,7 +23,7 @@ private:
     }
 
 public:
-    EmpleadoCasoDeUso(EmpleadoRepositorio& repositorio) : repo(repositorio) {}
+    EmpleadoCasoDeUso(IEmpleadoRepositorio& repositorio) : repo(repositorio) {}
 
     int agregarEmpleado(const string& nombre, const string& apellido,
                          const string& telefono, const string& cargo, double salario) {
